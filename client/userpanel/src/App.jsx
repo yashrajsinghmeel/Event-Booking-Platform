@@ -15,6 +15,8 @@ import "./App.css";
 import Dashboard from "./pages/Dashboard";
 import NavBar from "./components/Navbar";
 import useAuth from "./hooks/useAuth";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -41,6 +43,8 @@ refetch();
           <Route path="/set-password" element={<SetPassword />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
 
           {/* Protected route example */}
           <Route

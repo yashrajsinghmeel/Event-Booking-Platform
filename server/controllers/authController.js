@@ -263,7 +263,7 @@ export const getCurrentUser = async(req, res) => {
   if (!req.session.user) {
     return res.status(401).json({ message: "Not authenticated" });
   }
-  /* 
+  
   const phone = req.session.user.phone;
   const user = await User.findOne({phone});
   // Later, when user adds email
@@ -273,7 +273,7 @@ export const getCurrentUser = async(req, res) => {
     //   ...req.session.user,
     //   email: user.email
     // };
-    */
+    
 
   res.status(200).json({ user: req.session.user });
 };

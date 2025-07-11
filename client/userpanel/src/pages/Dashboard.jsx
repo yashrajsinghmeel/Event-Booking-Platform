@@ -18,10 +18,10 @@ function Dashboard() {
           <Route path="book" element={<BookTickets />} />
           <Route path="tickets" element={<YourTickets />} />
           <Route path="user" element={<UserInfo />} />
-        </Route>
         <Route path="/book-now/:type" element={<BookingForm />} />
         <Route path="/temp-ticket" element={<TempTicket />} />
         <Route path="/make-payment" element={<Payment />} />
+        </Route>
         <Route path="/payment-success" element={<PaymentSuccess />} />
       </Routes>
     </>

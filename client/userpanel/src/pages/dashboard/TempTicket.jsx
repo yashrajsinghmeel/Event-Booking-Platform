@@ -83,18 +83,27 @@ function TempTicket() {
   const handleBack = async() => {
     navigate("/dashboard/book");
   }
-  
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[linear-gradient(to_right,rgba(67,139,71,0.5),rgba(244,196,48,0.5),rgba(47,102,50,0.5))] p-4">
-        <div className="text-center p-8 bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl max-w-md w-full">
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 p-4 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-10 left-10 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse"></div>
+          <div className="absolute top-32 right-16 w-16 h-16 bg-emerald-200 rounded-full opacity-30 animate-bounce"></div>
+          <div className="absolute bottom-20 left-20 w-12 h-12 bg-green-300 rounded-full opacity-25 animate-pulse"></div>
+          <div className="absolute bottom-32 right-10 w-24 h-24 bg-emerald-300 rounded-full opacity-20 animate-bounce"></div>
+        </div>
+        
+        <div className="relative z-10 text-center p-8 bg-white/80 backdrop-blur-sm rounded-3xl shadow-2xl max-w-md w-full border border-green-200">
           <div className="animate-pulse flex flex-col items-center">
-            <div className="w-16 h-16 bg-gradient-to-br from-green-200 to-yellow-200 rounded-full mb-6"></div>
-            <div className="h-6 bg-gradient-to-r from-green-200 to-yellow-200 rounded-full w-3/4 mb-4"></div>
-            <div className="h-4 bg-gradient-to-r from-green-100 to-yellow-100 rounded-full w-1/2"></div>
+            <div className="w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-400 rounded-full mb-6 flex items-center justify-center">
+              <span className="text-2xl animate-bounce">🌿</span>
+            </div>
+            <div className="h-6 bg-gradient-to-r from-green-200 to-emerald-200 rounded-full w-3/4 mb-4"></div>
+            <div className="h-4 bg-gradient-to-r from-green-100 to-emerald-100 rounded-full w-1/2"></div>
           </div>
-          <p className="mt-8 text-green-700 font-semibold text-lg">Loading your ticket...</p>
+          <p className="mt-8 text-green-700 font-semibold text-lg">🎫 Loading your ticket...</p>
           <div className="mt-4 flex justify-center">
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
           </div>
@@ -104,136 +113,221 @@ function TempTicket() {
   }
 
   return (
-    <div className="min-h-screen bg-[linear-gradient(to_right,rgba(67,139,71,0.5),rgba(244,196,48,0.5),rgba(47,102,50,0.5))] p-4 sm:p-6 lg:p-8">
-      <div className="max-w-lg mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 p-4 relative overflow-hidden">
+      {/* Animated nature background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 left-10 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-32 right-16 w-16 h-16 bg-emerald-200 rounded-full opacity-30 animate-bounce"></div>
+        <div className="absolute bottom-20 left-20 w-12 h-12 bg-green-300 rounded-full opacity-25 animate-pulse"></div>
+        <div className="absolute bottom-32 right-10 w-24 h-24 bg-emerald-300 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-1/2 left-1/4 w-8 h-8 bg-green-400 rounded-full opacity-15 animate-ping"></div>
+        <div className="absolute top-1/4 right-1/3 w-14 h-14 bg-emerald-400 rounded-full opacity-20 animate-pulse"></div>
+      </div>
+
+      <div className="relative z-10 max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl sm:text-4xl font-bold  text-[#2F6132] mb-2 drop-shadow-lg">
-            Your Event Pass
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 mb-2 drop-shadow-lg animate-pulse">
+            🌿 Your Event Pass 🌿
           </h1>
-          <p className="text-[#438B47]  text-lg font-medium">Temporary Reservation</p>
+          <p className="text-green-700 text-lg sm:text-xl font-semibold">Temporary Reservation</p>
         </div>
 
-        {/* Modern Ticket Design */}
-        <div className="relative mb-8">
-          {/* Main Ticket Container */}
-          <div className="bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
-            
-            {/* Ticket Header with Gradient */}
-            <div className="relative bg-gradient-to-r from-green-600 via-yellow-400 to-green-700 p-6 text-white">
-              {/* Background Pattern */}
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 via-yellow-300/20 to-green-600/20"></div>
-              <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-8 -translate-x-8"></div>
-              
-              <div className="relative z-10">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h2 className="text-2xl sm:text-3xl font-bold mb-1">PRAKRITI POOJA</h2>
-                    <p className="text-white/90 text-lg font-medium">2025</p>
-                  </div>
-                  <div className="text-right">
+        {/* Ticket Container - Responsive Design */}
+        <div className="mb-8">
+          {/* Mobile Layout - Vertical */}
+          <div className="block lg:hidden">
+            <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-all duration-500 border-4 border-green-200">
+              {/* Ticket Header */}
+              <div className="relative bg-gradient-to-r from-green-600 via-emerald-500 to-green-700 p-6 text-white">
+                <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 via-emerald-300/20 to-green-600/20"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
+                <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-8 -translate-x-8"></div>
+                
+                <div className="relative z-10 text-center">
+                  <h2 className="text-2xl font-bold mb-2 animate-pulse">🌿 PRAKRITI POOJA 🌿</h2>
+                  <p className="text-white/90 text-lg font-medium">2025</p>
+                  <div className="mt-4 flex justify-center">
                     <div className={`px-4 py-2 rounded-full text-sm font-bold ${
                       ticket.paymentStatus === 'pending' 
-                        ? 'bg-yellow-500 text-yellow-900' 
-                        : 'bg-green-500 text-green-900'
-                    }`}>
-                      {ticket.paymentStatus?.toUpperCase()}
+                        ? 'bg-yellow-400 text-yellow-900' 
+                        : 'bg-green-400 text-green-900'
+                    } animate-bounce`}>
+                      {ticket.paymentStatus?.toUpperCase() || 'PENDING'}
                     </div>
                   </div>
                 </div>
-                
-                <div className="flex items-center space-x-4 text-white/90">
-                  <div className="flex items-center">
-                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
-                    </svg>
-                    <span className="font-medium">7th September 2025</span>
+              </div>
+
+              {/* Ticket Body */}
+              <div className="p-6 space-y-6">
+                {/* Event Details */}
+                <div className="text-center space-y-3">
+                  <div className="flex items-center justify-center gap-2 text-green-700">
+                    <span className="text-xl">📅</span>
+                    <span className="font-semibold">7th September 2025</span>
                   </div>
-                  <div className="flex items-center">
-                    <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="font-medium">Bangalore</span>
+                  <div className="flex items-center justify-center gap-2 text-green-700">
+                    <span className="text-xl">📍</span>
+                    <span className="font-semibold">Bangalore</span>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-dashed border-green-300"></div>
+                  </div>
+                  <div className="relative flex justify-center">
+                    <span className="bg-white px-4 text-green-600 text-sm font-bold">🎫 TICKET DETAILS</span>
+                  </div>
+                </div>
+
+                {/* Ticket Info Grid */}
+                <div className="grid grid-cols-1 gap-4">
+                  <div className="bg-green-50 rounded-2xl p-4 text-center border border-green-200">
+                    <p className="text-xs font-bold text-green-600 uppercase mb-1">🙋‍♂️ Name</p>
+                    <p className="text-lg font-bold text-green-800">{ticket.name}</p>
+                  </div>
+                  <div className="bg-green-50 rounded-2xl p-4 text-center border border-green-200">
+                    <p className="text-xs font-bold text-green-600 uppercase mb-1">📱 Phone</p>
+                    <p className="text-lg font-bold text-green-800">{ticket.phone}</p>
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-emerald-50 rounded-2xl p-4 text-center border border-emerald-200">
+                      <p className="text-xs font-bold text-emerald-600 uppercase mb-1">👥 Persons</p>
+                      <p className="text-lg font-bold text-emerald-800">{ticket.ticketCount}</p>
+                    </div>
+                    <div className="bg-emerald-50 rounded-2xl p-4 text-center border border-emerald-200">
+                      <p className="text-xs font-bold text-emerald-600 uppercase mb-1">💰 Amount</p>
+                      <p className="text-lg font-bold text-emerald-800">₹{ticket.amount}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Booking ID */}
+                <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-2xl p-4 text-center border-2 border-green-300">
+                  <p className="text-xs font-bold text-green-600 uppercase mb-2">🎟️ Booking Code</p>
+                  <p className="text-xl font-bold text-green-800 tracking-wider">{bookingId?.slice(-8).toUpperCase()}</p>
+                </div>
+
+                {/* QR Code */}
+                <div className="flex justify-center">
+                  <div className="bg-green-100 rounded-2xl p-6 border-2 border-green-300">
+                    <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center animate-pulse">
+                      <span className="text-3xl">🌿</span>
+                    </div>
                   </div>
                 </div>
               </div>
+
+              {/* Ticket Perforations */}
+              <div className="absolute left-0 top-1/2 w-6 h-6 bg-green-50 rounded-full -translate-x-3 -translate-y-1/2 border-2 border-green-200"></div>
+              <div className="absolute right-0 top-1/2 w-6 h-6 bg-green-50 rounded-full translate-x-3 -translate-y-1/2 border-2 border-green-200"></div>
             </div>
+          </div>
 
-            {/* Ticket Body */}
-            <div className="p-6 sm:p-8 space-y-6">
-              {/* Ticket Details Grid */}
-              <div className="grid grid-cols-2 gap-6">
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Name</p>
-                  <p className="text-lg font-bold text-gray-800">{ticket.name}</p>
+          {/* Desktop Layout - Horizontal */}
+          <div className="hidden lg:block">
+            <div className="relative bg-white rounded-3xl shadow-2xl overflow-hidden transform hover:scale-[1.02] transition-all duration-500 border-4 border-green-200">
+              <div className="flex">
+                {/* Left Side - Event Info */}
+                <div className="flex-1 relative bg-gradient-to-br from-green-600 via-emerald-500 to-green-700 p-8 text-white">
+                  <div className="absolute inset-0 bg-gradient-to-br from-green-500/20 via-emerald-300/20 to-green-600/20"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-8 translate-x-8"></div>
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-8 -translate-x-8"></div>
+                  
+                  <div className="relative z-10 h-full flex flex-col justify-center">
+                    <h2 className="text-4xl font-bold mb-4 animate-pulse">🌿 PRAKRITI POOJA 🌿</h2>
+                    <p className="text-white/90 text-2xl font-medium mb-6">2025</p>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-3 text-lg">
+                        <span className="text-2xl">📅</span>
+                        <span className="font-semibold">7th September 2025</span>
+                      </div>
+                      <div className="flex items-center gap-3 text-lg">
+                        <span className="text-2xl">📍</span>
+                        <span className="font-semibold">Bangalore</span>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-8">
+                      <div className={`inline-block px-6 py-3 rounded-full text-sm font-bold ${
+                        ticket.paymentStatus === 'pending' 
+                          ? 'bg-yellow-400 text-yellow-900' 
+                          : 'bg-green-400 text-green-900'
+                      } animate-bounce`}>
+                        {ticket.paymentStatus?.toUpperCase() || 'PENDING'}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Phone</p>
-                  <p className="text-lg font-bold text-gray-800">{ticket.phone}</p>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Persons</p>
-                  <p className="text-lg font-bold text-gray-800">{ticket.ticketCount}</p>
-                </div>
-                <div className="space-y-1">
-                  <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Amount</p>
-                  <p className="text-lg font-bold text-green-600">₹{ticket.amount}</p>
-                </div>
-              </div>
 
-              {/* Divider */}
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-dashed border-gray-300"></div>
-                </div>
-                <div className="relative flex justify-center">
-                  <span className="bg-white px-4 text-gray-500 text-sm font-medium">TICKET DETAILS</span>
-                </div>
-              </div>
+                {/* Right Side - Ticket Details */}
+                <div className="flex-1 p-8">
+                  <div className="h-full flex flex-col justify-center space-y-6">
+                    <div className="text-center mb-6">
+                      <h3 className="text-2xl font-bold text-green-700 mb-2">🎫 TICKET DETAILS</h3>
+                      <div className="w-full h-px bg-gradient-to-r from-transparent via-green-300 to-transparent"></div>
+                    </div>
 
-              {/* Booking Code */}
-              <div className="bg-gray-50 rounded-2xl p-4 text-center">
-                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Booking Code</p>
-                <p className="text-2xl font-bold text-gray-800 tracking-wider">{bookingId?.slice(-8).toUpperCase()}</p>
-              </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-green-50 rounded-2xl p-4 text-center border border-green-200">
+                        <p className="text-xs font-bold text-green-600 uppercase mb-1">🙋‍♂️ Name</p>
+                        <p className="text-lg font-bold text-green-800">{ticket.name}</p>
+                      </div>
+                      <div className="bg-green-50 rounded-2xl p-4 text-center border border-green-200">
+                        <p className="text-xs font-bold text-green-600 uppercase mb-1">📱 Phone</p>
+                        <p className="text-lg font-bold text-green-800">{ticket.phone}</p>
+                      </div>
+                      <div className="bg-emerald-50 rounded-2xl p-4 text-center border border-emerald-200">
+                        <p className="text-xs font-bold text-emerald-600 uppercase mb-1">👥 Persons</p>
+                        <p className="text-lg font-bold text-emerald-800">{ticket.ticketCount}</p>
+                      </div>
+                      <div className="bg-emerald-50 rounded-2xl p-4 text-center border border-emerald-200">
+                        <p className="text-xs font-bold text-emerald-600 uppercase mb-1">💰 Amount</p>
+                        <p className="text-lg font-bold text-emerald-800">₹{ticket.amount}</p>
+                      </div>
+                    </div>
 
-              {/* QR Code Placeholder */}
-              <div className="flex justify-center">
-                <div className="bg-gray-100 rounded-2xl p-4 flex items-center justify-center">
-                  <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
-                    <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M3 3h6v6H3V3zm2 2v2h2V5H5zM3 15h6v6H3v-6zm2 2v2h2v-2H5zM15 3h6v6h-6V3zm2 2v2h2V5h-2zM15 15h2v2h-2v-2zM17 17h2v2h-2v-2zM19 15h2v2h-2v-2zM15 19h2v2h-2v-2zM17 21h2v2h-2v-2zM19 19h2v2h-2v-2z"/>
-                    </svg>
+                    <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-2xl p-4 text-center border-2 border-green-300">
+                      <p className="text-xs font-bold text-green-600 uppercase mb-2">🎟️ Booking Code</p>
+                      <p className="text-2xl font-bold text-green-800 tracking-wider">{bookingId?.slice(-8).toUpperCase()}</p>
+                    </div>
+
+                    <div className="flex justify-center">
+                      <div className="bg-green-100 rounded-2xl p-6 border-2 border-green-300">
+                        <div className="w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center animate-pulse">
+                          <span className="text-4xl">🌿</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {/* Ticket Perforations */}
-            <div className="absolute left-0 top-1/2 w-6 h-6 bg-gray-100 rounded-full -translate-x-3 -translate-y-1/2"></div>
-            <div className="absolute right-0 top-1/2 w-6 h-6 bg-gray-100 rounded-full translate-x-3 -translate-y-1/2"></div>
+              {/* Horizontal Perforations */}
+              <div className="absolute top-0 left-1/2 w-6 h-6 bg-green-50 rounded-full -translate-x-3 -translate-y-3 border-2 border-green-200"></div>
+              <div className="absolute bottom-0 left-1/2 w-6 h-6 bg-green-50 rounded-full -translate-x-3 translate-y-3 border-2 border-green-200"></div>
+            </div>
           </div>
         </div>
 
         {/* Timer Alert */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl p-6 mb-8 border-l-4 border-yellow-400">
-          <div className="flex items-center justify-between">
+        <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-6 mb-8 border-2 border-orange-200">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center space-x-4">
-              <div className="flex-shrink-0">
-                <div className="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
-                  <svg className="w-6 h-6 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                  </svg>
-                </div>
+              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center animate-pulse">
+                <span className="text-2xl">⏰</span>
               </div>
-              <div>
-                <h3 className="text-lg font-bold text-gray-800">Complete Payment</h3>
-                <p className="text-sm text-gray-600">Booking expires in</p>
+              <div className="text-center sm:text-left">
+                <h3 className="text-lg font-bold text-orange-700">⚡ Complete Payment</h3>
+                <p className="text-sm text-orange-600">Booking expires in</p>
               </div>
             </div>
-            <div className="text-right">
-              <div className="bg-gradient-to-r from-yellow-400 to-orange-400 text-white px-4 py-2 rounded-full">
+            <div className="text-center">
+              <div className="bg-gradient-to-r from-orange-400 to-red-400 text-white px-6 py-3 rounded-full animate-pulse">
                 <p className="text-2xl font-bold">{formatTime(timeLeft)}</p>
               </div>
             </div>
@@ -241,33 +335,74 @@ function TempTicket() {
         </div>
 
         {/* Action Buttons */}
-        <div className="space-y-4">
+        <div className="space-y-4 max-w-md mx-auto">
           <button
             onClick={handleProceed}
-            className="w-full bg-gradient-to-r from-green-600 via-yellow-400 to-green-700 text-white py-4 px-6 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3 cursor-pointer"
+            className="w-full bg-gradient-to-r from-green-600 via-emerald-500 to-green-700 text-white py-4 px-6 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-3 cursor-pointer animate-pulse"
+            style={{
+              boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)'
+            }}
           >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-              <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-            </svg>
+            <span className="text-2xl">💳</span>
             <span>Proceed to Payment</span>
           </button>
 
           <button
-            onClick={() => navigate("/dashboard/book")}
-            className="w-full bg-[linear-gradient(to_right,rgba(67,139,71,1),rgba(244,196,48,1))] text-white py-3 px-4 rounded-2xl font-semibold group-hover:bg-[linear-gradient(to right, rgba(47,97,50,1), rgba(171,137,33,1))] focus:ring-4 focus:ring-[#60c9655e] transition-all duration-200 transform hover:scale-105 hover:cursor-pointer hover:shadow-xl"
+            onClick={handleBack}
+            className="w-full bg-gradient-to-r from-emerald-600 to-green-600 text-white py-3 px-4 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl cursor-pointer border-2 border-green-300"
           >
-            Back to Dashboard
+            <span className="flex items-center justify-center gap-2">
+              <span>🏠</span>
+              <span>Back to Dashboard</span>
+            </span>
           </button>
         </div>
 
-        {/* Footer Info */}
+        {/* Footer */}
         <div className="mt-8 text-center">
-          <p className="text-[#438B47] hover:text-[#2F6132] text-sm">
-            Need help? Contact support at support@prakritipuja.com
+          <p className="text-green-700 hover:text-green-600 text-sm transition-colors duration-200">
+            🌿 Need help? Contact support at support@prakritipuja.com
           </p>
         </div>
       </div>
+
+      {/* Custom Styles */}
+      <style jsx>{`
+        @keyframes pulse-glow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5), 0 0 40px rgba(34, 197, 94, 0.2);
+          }
+          50% {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.8), 0 0 60px rgba(34, 197, 94, 0.4);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%) skewX(-12deg);
+          }
+          100% {
+            transform: translateX(200%) skewX(-12deg);
+          }
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        button:hover {
+          animation: pulse-glow 1s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 }

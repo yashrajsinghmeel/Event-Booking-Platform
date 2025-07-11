@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import API from "../../services/api";
 import { validatePhone } from "../../utils/validatePhone";
 import { validateEmail } from "../../utils/validateEmail";
+import './BookTicketForm.css'
 
 function BookingForm() {
   const { user } = useAuth();
@@ -68,34 +69,30 @@ function BookingForm() {
 
   if (!ticketType) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-[linear-gradient(to_right,rgba(67,139,71,0.5),rgba(244,196,48,0.5),rgba(47,102,50,0.5))] p-4">
-        <div className="bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl p-8 w-full max-w-md border border-white/20 text-center">
-          <div className="w-20 h-20 bg-[linear-gradient(to_right,rgba(67,139,71,1),rgba(244,196,48,1))] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-            <svg
-              className="w-10 h-10 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-            </svg>
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 flex items-center justify-center p-4 relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-20 w-16 h-16 bg-green-200 rounded-full opacity-30 animate-pulse"></div>
+          <div className="absolute top-40 right-24 w-12 h-12 bg-emerald-200 rounded-full opacity-40 animate-bounce"></div>
+          <div className="absolute bottom-32 left-16 w-20 h-20 bg-green-300 rounded-full opacity-20 animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-14 h-14 bg-emerald-300 rounded-full opacity-25 animate-bounce"></div>
+        </div>
+
+        <div className="relative z-10 bg-white/80 backdrop-blur-lg shadow-2xl rounded-3xl p-8 w-full max-w-md border border-white/30 text-center">
+          <div className="w-20 h-20 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse">
+            <span className="text-3xl animate-bounce">⚠️</span>
           </div>
-          <h2 className="text-2xl font-bold bg-[linear-gradient(to_right,rgba(67,139,71,1),rgba(244,196,48,1))] bg-clip-text text-transparent mb-4">
-            No Booking Data Found
+          <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 mb-4">
+            🌿 No Booking Data Found 🌿
           </h2>
-          <p className="text-gray-600 mb-6">
+          <p className="text-green-700 mb-6 text-lg">
             Please select a ticket first to proceed with booking.
           </p>
           <button
             onClick={() => navigate("/dashboard/book")}
-            className="w-full py-3 px-4 bg-[linear-gradient(to_right,rgba(67,139,71,1),rgba(244,196,48,1))] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#2F6132] focus:ring-offset-2"
+            className="w-full py-4 px-6 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2 animate-pulse"
           >
-            Go to Booking Page
+            🎫 Go to Booking Page
           </button>
         </div>
       </div>
@@ -103,40 +100,41 @@ function BookingForm() {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[linear-gradient(to_right,rgba(67,139,71,0.5),rgba(244,196,48,0.5),rgba(47,102,50,0.5))] p-4">
-      <div className="bg-white/90 backdrop-blur-sm shadow-2xl rounded-2xl p-8 w-full max-w-md border border-white/20">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 left-10 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-32 right-16 w-16 h-16 bg-emerald-200 rounded-full opacity-30 animate-bounce"></div>
+        <div className="absolute bottom-20 left-20 w-12 h-12 bg-green-300 rounded-full opacity-25 animate-pulse"></div>
+        <div className="absolute bottom-32 right-10 w-24 h-24 bg-emerald-300 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-1/2 left-1/4 w-8 h-8 bg-green-400 rounded-full opacity-15 animate-ping"></div>
+        <div className="absolute top-1/4 right-1/3 w-14 h-14 bg-emerald-400 rounded-full opacity-20 animate-pulse"></div>
+      </div>
+
+      <div className="relative z-10 bg-white/80 backdrop-blur-lg shadow-2xl rounded-3xl p-8 w-full max-w-lg border border-white/30">
         {/* Header Section */}
         <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-[linear-gradient(to_right,rgba(67,139,71,1),rgba(244,196,48,1))] rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-            <svg
-              className="w-10 h-10 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
-              />
-            </svg>
+          <div className="w-24 h-24 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg animate-pulse">
+            <span className="text-4xl animate-bounce">🎫</span>
           </div>
-          <h2 className="text-3xl font-bold bg-[linear-gradient(to_right,rgba(67,139,71,1),rgba(244,196,48,1))] bg-clip-text text-transparent mb-2">
-            Book {ticketType} 🎫
+          <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-emerald-600 to-green-700 mb-3 animate-pulse">
+            🌿 Book {ticketType} 🌿
           </h2>
-          <p className="text-gray-600">Complete your booking details</p>
+          <p className="text-green-700 font-semibold text-lg">
+            Complete your booking details
+          </p>
         </div>
 
-        {/* Name Input with Icon */}
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-medium mb-2">
-            Name
+        {/* Name Input with Enhanced Styling */}
+        <div className="mb-6">
+          <label className="block text-green-800 text-sm font-bold mb-3 flex items-center gap-2">
+            <span className="text-lg">👤</span>
+            Full Name
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg
-                className="w-5 h-5 text-gray-400"
+                className="w-5 h-5 text-green-500 group-focus-within:text-green-600 transition-colors duration-200"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -153,21 +151,22 @@ function BookingForm() {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Enter your name"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F6132] focus:border-[#2F6132] outline-none transition-all duration-200"
+              placeholder="Enter your full name"
+              className="w-full pl-12 pr-4 py-4 border-2 border-green-200 rounded-xl focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white/70 backdrop-blur-sm hover:bg-white/90 text-green-800 font-medium"
             />
           </div>
         </div>
 
-        {/* Phone Input with Icon */}
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-medium mb-2">
+        {/* Phone Input with Enhanced Styling */}
+        <div className="mb-6">
+          <label className="block text-green-800 text-sm font-bold mb-3 flex items-center gap-2">
+            <span className="text-lg">📱</span>
             Phone Number
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg
-                className="w-5 h-5 text-gray-400"
+                className="w-5 h-5 text-green-500 group-focus-within:text-green-600 transition-colors duration-200"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -184,58 +183,58 @@ function BookingForm() {
               type="text"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              placeholder="Enter your phone number"
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F6132] focus:border-[#2F6132] outline-none transition-all duration-200"
+              placeholder="Enter your 10-digit phone number"
+              className="w-full pl-12 pr-4 py-4 border-2 border-green-200 rounded-xl focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white/70 backdrop-blur-sm hover:bg-white/90 text-green-800 font-medium"
             />
           </div>
         </div>
 
-        {/* Email Input with Icon */}
-        <div className="space-y-2 mb-4">
-          <div>
-            <label className="block text-gray-700 text-sm font-medium mb-2">
-              Email Address
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <svg
-                  className="w-5 h-5 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16 12H8m8-4H8m8 8H8m13-9.35a2 2 0 00-1.2-.65L5 4a2 2 0 00-2 2v12c0 .55.22 1.05.59 1.41.38.37.88.59 1.41.59h14c.55 0 1.05-.22 1.41-.59.38-.37.59-.87.59-1.41V7a2 2 0 00-.59-1.35z"
-                  />
-                </svg>
-              </div>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F6132] focus:border-[#2F6132] outline-none transition-all duration-200"
-              />
+        {/* Email Input with Enhanced Styling */}
+        <div className="mb-6">
+          <label className="block text-green-800 text-sm font-bold mb-3 flex items-center gap-2">
+            <span className="text-lg">📧</span>
+            Email Address
+          </label>
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+              <svg
+                className="w-5 h-5 text-green-500 group-focus-within:text-green-600 transition-colors duration-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
             </div>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email address"
+              className="w-full pl-12 pr-4 py-4 border-2 border-green-200 rounded-xl focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 bg-white/70 backdrop-blur-sm hover:bg-white/90 text-green-800 font-medium"
+            />
           </div>
-          <p className="text-xs text-gray-500 px-1">
-            📧 Please provide a valid email — your e-tickets will be delivered
-            there.
+          <p className="text-xs text-green-600 mt-2 px-2 flex items-center gap-1">
+            <span className="animate-pulse">💌</span>
+            Your e-tickets will be delivered to this email address
           </p>
         </div>
 
-        {/* Number of Persons Input with Icon */}
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-medium mb-2">
+        {/* Number of Persons Input with Enhanced Styling */}
+        <div className="mb-6">
+          <label className="block text-green-800 text-sm font-bold mb-3 flex items-center gap-2">
+            <span className="text-lg">👥</span>
             Number of Persons
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg
-                className="w-5 h-5 text-gray-400"
+                className="w-5 h-5 text-green-500 group-focus-within:text-green-600 transition-colors duration-200"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -261,24 +260,25 @@ function BookingForm() {
               }
               max={ticketType === "Group of 10" ? 49 : undefined}
               disabled={ticketType === "Single Person"}
-              className={`w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#2F6132] focus:border-[#2F6132] outline-none transition-all duration-200 cursor-not-allowed ${
+              className={`w-full pl-12 pr-4 py-4 border-2 border-green-200 rounded-xl focus:ring-2 focus:ring-green-400 focus:border-green-400 outline-none transition-all duration-300 font-medium ${
                 ticketType === "Single Person"
-                  ? "bg-gray-100 cursor-not-allowed text-gray-500"
-                  : "bg-white"
+                  ? "bg-green-50 cursor-not-allowed text-green-600"
+                  : "bg-white/70 backdrop-blur-sm hover:bg-white/90 text-green-800"
               }`}
             />
           </div>
         </div>
 
-        {/* Amount Input with Icon */}
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-medium mb-2">
+        {/* Amount Input with Enhanced Styling */}
+        <div className="mb-8">
+          <label className="block text-green-800 text-sm font-bold mb-3 flex items-center gap-2">
+            <span className="text-lg">💰</span>
             Amount Payable
           </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+          <div className="relative group">
+            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg
-                className="w-5 h-5 text-gray-400"
+                className="w-5 h-5 text-green-500"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -295,19 +295,45 @@ function BookingForm() {
               type="text"
               value={`₹${amount}`}
               disabled
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed text-gray-500 font-semibold"
+              className="w-full pl-12 pr-4 py-4 border-2 border-green-200 rounded-xl bg-gradient-to-r from-green-50 to-emerald-50 cursor-not-allowed text-green-700 font-bold text-lg"
             />
           </div>
         </div>
 
-        {/* Proceed Button */}
-        <Button text="Book Ticket" onClick={handleProceed} />
+        {/* Enhanced Proceed Button */}
+        <div className="mb-6">
+          <button
+            onClick={handleProceed}
+            className="group relative overflow-hidden w-full py-4 px-6 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-lg rounded-2xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+            style={{
+              boxShadow: "0 0 30px rgba(34, 197, 94, 0.4)",
+              animation: "pulse-glow 2s ease-in-out infinite",
+            }}
+          >
+            {/* Animated background overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-        {/* Footer */}
-        <div className="mt-8 text-center">
-          <p className="text-xs text-gray-500">
-            By proceeding, you agree to our Terms of Service and Privacy Policy
-          </p>
+            {/* Shimmer effect */}
+            <div className="absolute inset-0 -top-2 -bottom-2 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 transform -skew-x-12 animate-shimmer"></div>
+
+            {/* Button content */}
+            <span className="relative z-10 flex items-center justify-center gap-3">
+              <span className="text-2xl animate-bounce">🎟️</span>
+              <span className="tracking-wide">Book My Tickets Now!</span>
+              <span className="text-2xl animate-bounce">🌿</span>
+            </span>
+          </button>
+        </div>
+
+        {/* Enhanced Footer */}
+        <div className="text-center">
+          <div className="bg-gradient-to-r from-green-100 to-emerald-100 rounded-xl p-4 border border-green-200">
+            <p className="text-xs text-green-700 font-medium flex items-center justify-center gap-1">
+              <span className="animate-pulse">🔒</span>
+              By proceeding, you agree to our Terms of Service and Privacy
+              Policy
+            </p>
+          </div>
         </div>
       </div>
     </div>

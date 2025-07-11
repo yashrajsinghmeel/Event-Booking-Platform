@@ -30,3 +30,7 @@
 .animate-shimmer {
   animation: shimmer 2s infinite;
 }
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
