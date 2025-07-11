@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+body * {
+    /* To remove the blinking caret from the text */
+  user-select: none;
+}
