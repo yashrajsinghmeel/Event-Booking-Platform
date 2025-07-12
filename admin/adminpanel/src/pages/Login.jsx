@@ -1,8 +1,8 @@
 // src/pages/Login.jsx
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import API from "../services/api";
-import { validatePhone } from "../utils/validatePhone";
+import API from "../services/api.js";
+import { validatePhone } from "../utils/validatePhone.jsx";
 import { Eye, EyeOff } from "lucide-react";
 import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth.js";
@@ -26,7 +26,7 @@ function Login() {
     }
 
     try {
-      await API.post("/users/login", { phone, password });
+      await API.post("/users/login", { phone, password, role:"admin" });
       await refetch();
       toast.success("Login successful!");
       setTimeout(() => {

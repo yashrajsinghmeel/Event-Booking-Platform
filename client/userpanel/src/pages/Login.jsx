@@ -14,8 +14,8 @@ function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const {refetch}=useAuth();
-  
+  const { refetch } = useAuth();
+
   const handleLogin = async () => {
     if (!validatePhone(phone)) {
       toast.error("Please enter a valid 10-digit Indian phone number");
@@ -28,10 +28,7 @@ function Login() {
     }
 
     try {
-      await API.post(
-        "/users/login",
-        { phone, password }
-      );
+      await API.post("/users/login", { phone, password, role: "user" });
       await refetch();
       toast.success("Login successful!");
       setTimeout(() => {
@@ -51,7 +48,7 @@ function Login() {
         <div className="absolute top-40 right-20 w-96 h-96 bg-gradient-to-br from-green-200/20 to-emerald-200/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-20 left-40 w-64 h-64 bg-gradient-to-br from-emerald-300/25 to-green-300/25 rounded-full blur-3xl animate-pulse delay-2000"></div>
         <div className="absolute bottom-10 right-10 w-48 h-48 bg-gradient-to-br from-green-300/20 to-emerald-300/20 rounded-full blur-2xl animate-pulse delay-500"></div>
-        
+
         {/* Floating particles */}
         <div className="absolute top-1/4 left-1/4 w-4 h-4 bg-emerald-400 rounded-full opacity-30 animate-bounce"></div>
         <div className="absolute top-1/3 right-1/3 w-3 h-3 bg-green-400 rounded-full opacity-40 animate-bounce delay-300"></div>
@@ -67,7 +64,7 @@ function Login() {
           <div className="absolute top-4 right-4 w-3 h-3 bg-emerald-400 rounded-full opacity-30 animate-pulse"></div>
           <div className="absolute bottom-4 left-4 w-2 h-2 bg-green-400 rounded-full opacity-40 animate-pulse delay-500"></div>
           <div className="absolute top-1/2 left-2 w-1 h-1 bg-emerald-500 rounded-full opacity-50 animate-pulse delay-1000"></div>
-          
+
           {/* Header Section */}
           <div className="text-center mb-8">
             <div className="relative mb-6">
@@ -82,7 +79,9 @@ function Login() {
             <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-green-700 mb-2">
               Welcome Back 🙏
             </h2>
-            <p className="text-emerald-700/70 font-medium">Sign in to continue your spiritual journey</p>
+            <p className="text-emerald-700/70 font-medium">
+              Sign in to continue your spiritual journey
+            </p>
           </div>
 
           {/* Phone Input */}
@@ -165,10 +164,10 @@ function Login() {
           >
             {/* Animated background overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            
+
             {/* Shimmer effect */}
             <div className="absolute inset-0 -top-2 -bottom-2 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 transform -skew-x-12 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
-            
+
             {/* Button content */}
             <span className="relative z-10 flex items-center justify-center gap-2">
               <span className="text-lg">🚀</span>
@@ -213,7 +212,7 @@ function Login() {
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-emerald-200/30 to-green-200/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-xl"></div>
               </Link>
-              
+
               <Link
                 to="/forgot-password"
                 className="group relative overflow-hidden px-4 py-2 bg-gradient-to-r from-emerald-100/70 to-green-100/70 backdrop-blur-sm text-emerald-700 font-semibold rounded-xl border border-emerald-200/50 hover:border-emerald-300 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg transform hover:scale-[1.02]"
@@ -243,8 +242,13 @@ function Login() {
           <div className="mt-8 text-center">
             <p className="text-xs text-emerald-600/70 font-medium">
               By signing in, you agree to our{" "}
-              <span className="text-emerald-700 font-semibold">Terms of Service</span> and{" "}
-              <span className="text-emerald-700 font-semibold">Privacy Policy</span>
+              <span className="text-emerald-700 font-semibold">
+                Terms of Service
+              </span>{" "}
+              and{" "}
+              <span className="text-emerald-700 font-semibold">
+                Privacy Policy
+              </span>
             </p>
           </div>
         </div>
