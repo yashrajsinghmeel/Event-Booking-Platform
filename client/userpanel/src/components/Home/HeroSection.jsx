@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import './HeroSection.css'
+import "./HeroSection.css";
 
 function HeroSection() {
   const navigate = useNavigate();
@@ -48,15 +48,16 @@ function HeroSection() {
             onClick={Booktickets}
             className="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-lg rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
             style={{
-              animation: 'pulse-glow 2s ease-in-out infinite, float 3s ease-in-out infinite'
+              animation:
+                "pulse-glow 2s ease-in-out infinite, float 3s ease-in-out infinite",
             }}
           >
             {/* Animated background overlay */}
             <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            
+
             {/* Shimmer effect */}
             <div className="absolute inset-0 -top-2 -bottom-2 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 transform -skew-x-12 group-hover:animate-shimmer"></div>
-            
+
             {/* Button content */}
             <span className="relative z-10 flex items-center gap-2">
               <span className="text-xl animate-bounce">🎟</span>
@@ -74,8 +75,6 @@ function HeroSection() {
           </p>
         </div>
       </div>
-
-      
     </section>
   );
 }

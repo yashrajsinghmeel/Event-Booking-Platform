@@ -126,10 +126,10 @@ export const setPassword = async (req, res) => {
 
 // Login user with phone number
 export const loginUser = async (req, res) => {
-  const { phone, password } = req.body;
+  const { phone, password, role } = req.body;
 
   try {
-    const user = await User.findOne({ phone });
+    const user = await User.findOne({ phone, role });
     if (!user) {
       return res.status(400).json({ message: "Oops! New here? Sign up 😄 " });
     }
@@ -138,7 +138,7 @@ export const loginUser = async (req, res) => {
       return res.status(400).json({ message: "user not verified otp sent " });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch =  bcrypt.compareSync(password, user.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });
     }
