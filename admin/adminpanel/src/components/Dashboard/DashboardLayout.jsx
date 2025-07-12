@@ -46,7 +46,7 @@ function DashboardLayout() {
             {/* Mobile Navigation */}
             <div className="flex gap-1 p-2 overflow-x-auto">
               <NavLink
-                to="/dashboard/book"
+                to="/dashboard/validate"
                 className={
                   isBookActive
                     ? "group relative px-3 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-full shadow-lg transform scale-105 transition-all duration-300 text-xs whitespace-nowrap"
@@ -54,8 +54,8 @@ function DashboardLayout() {
                 }
               >
                 <span className="relative z-10 flex items-center gap-1">
-                  <span className="text-xs">🎟</span>
-                  Book
+                  <span className="text-xs">🎯</span>
+                  QR Scanner
                 </span>
                 {isBookActive && (
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-400 opacity-20 rounded-full animate-pulse"></div>
@@ -63,7 +63,7 @@ function DashboardLayout() {
               </NavLink>
 
               <NavLink
-                to="/dashboard/tickets"
+                to="/dashboard/settings"
                 className={({ isActive }) =>
                   isActive
                     ? "group relative px-3 py-2 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-full shadow-lg transform scale-105 transition-all duration-300 text-xs whitespace-nowrap"
@@ -73,8 +73,8 @@ function DashboardLayout() {
                 {({ isActive }) => (
                   <>
                     <span className="relative z-10 flex items-center gap-1">
-                      <span className="text-xs">📋</span>
-                      Tickets
+                      <span className="text-xs">⚙️</span>
+                      Settings
                     </span>
                     {isActive && (
                       <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-400 opacity-20 rounded-full animate-pulse"></div>
@@ -127,9 +127,9 @@ function DashboardLayout() {
                 }
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  <span className="text-sm">🎟</span>
-                  <span className="hidden md:inline">Book Tickets</span>
-                  <span className="md:hidden">Book</span>
+                  <span className="text-sm">🎯 </span>
+                  <span className="hidden md:inline">QR Scanner</span>
+                  <span className="md:hidden">QR Scanner</span>
                 </span>
                 {isBookActive && (
                   <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-400 opacity-20 rounded-full animate-pulse"></div>
@@ -137,7 +137,7 @@ function DashboardLayout() {
               </NavLink>
 
               <NavLink
-                to="/dashboard/tickets"
+                to="/dashboard/settings"
                 className={({ isActive }) =>
                   isActive
                     ? "group relative px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-full shadow-lg transform scale-105 transition-all duration-300 text-sm md:text-base"
@@ -147,9 +147,9 @@ function DashboardLayout() {
                 {({ isActive }) => (
                   <>
                     <span className="relative z-10 flex items-center gap-2">
-                      <span className="text-sm">📋</span>
-                      <span className="hidden md:inline">Your Tickets</span>
-                      <span className="md:hidden">Tickets</span>
+                      <span className="text-sm">⚙️</span>
+                      <span className="hidden md:inline">Settings</span>
+                      <span className="md:hidden">Settings</span>
                     </span>
                     {isActive && (
                       <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-400 opacity-20 rounded-full animate-pulse"></div>

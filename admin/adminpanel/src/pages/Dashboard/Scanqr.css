@@ -1,0 +1,95 @@
+ @keyframes pulse-glow {
+          0%, 100% {
+            box-shadow: 0 0 20px rgba(34, 197, 94, 0.5), 0 0 40px rgba(34, 197, 94, 0.2);
+          }
+          50% {
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.8), 0 0 60px rgba(34, 197, 94, 0.4);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%) skewX(-12deg);
+          }
+          100% {
+            transform: translateX(200%) skewX(-12deg);
+          }
+        }
+
+        @keyframes scan-line {
+          0% {
+            top: 0;
+            opacity: 1;
+          }
+          100% {
+            top: 100%;
+            opacity: 0;
+          }
+        }
+
+        @keyframes ripple {
+          0% {
+            transform: scale(0.8);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(1.4);
+            opacity: 0;
+          }
+        }
+
+        @keyframes ripple-delayed {
+          0% {
+            transform: scale(0.8);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.2);
+            opacity: 0.5;
+          }
+          100% {
+            transform: scale(1.6);
+            opacity: 0;
+          }
+        }
+
+        .animate-shimmer {
+          animation: shimmer 2s infinite;
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-scan-line {
+          animation: scan-line 2s linear infinite;
+        }
+
+        .animate-ripple {
+          animation: ripple 1s ease-out infinite;
+        }
+
+        .animate-ripple-delayed {
+          animation: ripple-delayed 1s ease-out infinite;
+          animation-delay: 0.3s;
+        }
+
+        .shadow-green-glow {
+          box-shadow: 0 0 30px rgba(34, 197, 94, 0.8);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+          .animate-scan-line {
+            animation: scan-line 2.5s linear infinite;
+          }
+        }

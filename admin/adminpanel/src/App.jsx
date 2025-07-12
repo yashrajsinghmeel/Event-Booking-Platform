@@ -8,6 +8,9 @@ import NavBar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoutes';
 import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -20,6 +23,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}></Route>
           <Route path='/login' element={<Login/>}></Route>
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
            {/* Protected route example */}
           <Route
             path="/dashboard/*"

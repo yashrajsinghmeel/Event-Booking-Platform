@@ -1,107 +1,307 @@
 import { useEffect, useRef, useState } from "react";
 import API from "../../services/api";
+import './scanqr.css'
 
 function ScanQR() {
   const [scanResult, setScanResult] = useState(null);
   const [scanning, setScanning] = useState(false);
   const [cameraStarting, setCameraStarting] = useState(false);
+  const [capturing, setCapturing] = useState(false);
   const html5QrCodeRef = useRef(null);
-  const isRunningRef = useRef(false); // 🔥 NEW
+  const isRunningRef = useRef(false);
 
   useEffect(() => {
     if (!scanning) return;
 
     setCameraStarting(true);
 
-    import("html5-qrcode").then(({ Html5Qrcode }) => {
-      html5QrCodeRef.current = new Html5Qrcode("reader");
+    // Use requestAnimationFrame to ensure DOM is fully updated
+    const initializeScanner = async () => {
+      try {
+        const { Html5Qrcode } = await import("html5-qrcode");
+        
+        // Wait for DOM to be updated and element to be rendered
+        const waitForElement = (selector, timeout = 5000) => {
+          return new Promise((resolve, reject) => {
+            const startTime = Date.now();
+            
+            const checkElement = () => {
+              const element = document.getElementById(selector);
+              if (element) {
+                resolve(element);
+                return;
+              }
+              
+              if (Date.now() - startTime > timeout) {
+                reject(new Error(`Element with id="${selector}" not found within ${timeout}ms`));
+                return;
+              }
+              
+              requestAnimationFrame(checkElement);
+            };
+            
+            checkElement();
+          });
+        };
 
-      html5QrCodeRef.current.start(
-        { facingMode: "environment" },
-        { fps: 10, qrbox: { width: 250, height: 250 } },
-        async (decodedText) => {
-          isRunningRef.current = false; // set not running
-          await html5QrCodeRef.current.stop();
-          setScanning(false);
+        // First set cameraStarting to false to render the reader element
+        setCameraStarting(false);
+        
+        // Wait for the reader element to be rendered
+        await waitForElement("reader");
 
-          setScanResult("🔍 Validating...");
-          
-          try {
-              const res = await API.post("/bookings/validate", { qrData: decodedText });
-              new Audio("/correct.mp3").play().catch(() => {});
-              setScanResult(`✅ Ticket Valid: ${res.data.name} (${res.data.status})`);
-            } catch (err) {
+        html5QrCodeRef.current = new Html5Qrcode("reader");
+
+        await html5QrCodeRef.current.start(
+          { facingMode: "environment" },
+          { fps: 10, qrbox: { width: 250, height: 250 } },
+          async (decodedText) => {
+            setCapturing(true);
+            
+            setTimeout(async () => {
+              try {
+                if (html5QrCodeRef.current && isRunningRef.current) {
+                  isRunningRef.current = false;
+                  await html5QrCodeRef.current.stop();
+                }
+              } catch (stopError) {
+                console.warn("Error stopping scanner:", stopError);
+              }
+              
+              setScanning(false);
+              setCapturing(false);
+
+              setScanResult("🔍 Validating...");
+
+              try {
+                const res = await API.post("/bookings/validate", { qrData: decodedText });
+                new Audio("/correct.mp3").play().catch(() => {});
+                setScanResult(`✅ Ticket Valid: ${res.data.name} (${res.data.status})`);
+              } catch (err) {
                 new Audio("/errorsound.mp3").play().catch(() => {});
                 setScanResult("❌ Invalid or already used ticket!");
-          }
-        },
-        () => {}
-      ).then(() => {
+              }
+            }, 1000);
+          },
+          () => {} // Error callback
+        );
+
+        isRunningRef.current = true;
+        
+      } catch (error) {
+        console.error("Error initializing scanner:", error);
         setCameraStarting(false);
-        isRunningRef.current = true; // ✅ mark as running
-      }).catch(() => {
-        setCameraStarting(false);
-      });
-    });
+        setScanning(false);
+      }
+    };
+
+    initializeScanner();
 
     return () => {
       if (html5QrCodeRef.current && isRunningRef.current) {
-        html5QrCodeRef.current.stop().catch(() => {});
+        html5QrCodeRef.current.stop().catch((error) => {
+          console.warn("Error stopping scanner on cleanup:", error);
+        });
         isRunningRef.current = false;
       }
     };
   }, [scanning]);
 
   const handleStopScanning = async () => {
-    if (html5QrCodeRef.current && isRunningRef.current) {
-      await html5QrCodeRef.current.stop();
-      isRunningRef.current = false;
-      setScanning(false);
+    if (isRunningRef.current && html5QrCodeRef.current) {
+      try {
+        isRunningRef.current = false;
+        await html5QrCodeRef.current.stop();
+      } catch (error) {
+        console.warn("Error stopping scanner:", error);
+      }
     }
+    setScanning(false);
+    setCapturing(false);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-green-50">
-      <h2 className="text-3xl font-bold mb-6 text-green-800">🎯 Scan Ticket QR</h2>
+    <div className="relative min-h-screen bg-gradient-to-br from-green-50 via-lime-50 to-yellow-100 flex items-center justify-center p-4 sm:p-6 overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 left-10 w-16 h-16 bg-green-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-32 right-16 w-12 h-12 bg-lime-200 rounded-full opacity-30 animate-bounce"></div>
+        <div className="absolute bottom-20 left-20 w-20 h-20 bg-yellow-200 rounded-full opacity-25 animate-pulse"></div>
+        <div className="absolute bottom-32 right-10 w-14 h-14 bg-green-300 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-1/2 left-1/4 w-8 h-8 bg-lime-400 rounded-full opacity-15 animate-ping"></div>
+        <div className="absolute top-1/4 right-1/3 w-18 h-18 bg-yellow-400 rounded-full opacity-20 animate-pulse"></div>
+      </div>
 
-      {!scanning && (
-        <button
-          onClick={() => {
-            setScanResult(null);
-            setScanning(true);
-          }}
-          className="px-6 py-3 bg-green-600 text-white rounded-xl text-xl shadow hover:bg-green-700 transition"
-        >
-          {scanResult ? "Scan Another Ticket" : "Start Scanning"}
-        </button>
-      )}
-
-      {scanning && !cameraStarting && (
-        <button
-          onClick={handleStopScanning}
-          className="mb-4 px-6 py-2 bg-red-600 text-white rounded-xl text-md shadow hover:bg-red-700 transition"
-        >
-          Stop Scanning
-        </button>
-      )}
-
-      {cameraStarting && (
-        <div className="my-6 flex items-center space-x-3 text-green-700">
-          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-green-600"></div>
-          <span className="text-lg font-semibold">Starting Camera...</span>
+      <div className="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center justify-center">
+        {/* Enhanced Header */}
+         <div className="text-center mb-8">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 leading-tight animate-pulse">
+            <span className="text-4xl sm:text-5xl md:text-6xl">🔍 </span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-lime-600 to-yellow-600 mx-2">
+              Scan Ticket QR
+            </span>
+            <span className="text-4xl sm:text-5xl md:text-6xl">🔍 </span>
+          </h1>
+          <p className="text-lg sm:text-xl text-green-700 font-semibold tracking-wide">
+            Point your camera at the QR code to validate tickets
+          </p>
         </div>
-      )}
 
-      <div id="reader" className="w-full max-w-sm rounded shadow mt-6" />
+        {/* Start/Stop Scanning Button */}
+        {!scanning && (
+          <div className="flex justify-center mb-8">
+            <button
+              onClick={() => {
+                setScanResult(null);
+                setScanning(true);
+              }}
+              className="group relative overflow-hidden px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-bold text-lg sm:text-xl rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 cursor-pointer animate-float"
+              style={{
+                boxShadow: '0 0 30px rgba(34, 197, 94, 0.4)',
+                animation: 'pulse-glow 2s ease-in-out infinite, float 3s ease-in-out infinite'
+              }}
+            >
+              {/* Animated background overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-green-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Shimmer effect */}
+              <div className="absolute inset-0 -top-2 -bottom-2 bg-gradient-to-r from-transparent via-white to-transparent opacity-20 transform -skew-x-12 animate-shimmer"></div>
+              
+              {/* Button content */}
+              <span className="relative z-10 flex items-center gap-3">
+                <span className="text-xl sm:text-2xl animate-bounce">📱</span>
+                <span className="tracking-wide">
+                  {scanResult ? "Scan Another Ticket" : "Start Scanning"}
+                </span>
+              </span>
+            </button>
+          </div>
+        )}
 
-      {scanResult && (
-        <div className={`mt-6 p-4 rounded text-center text-xl font-semibold 
-          ${scanResult.startsWith("✅") ? "bg-green-200 text-green-800" : 
-            scanResult.startsWith("❌") ? "bg-red-200 text-red-800" : 
-            "bg-yellow-100 text-yellow-800"}`}>
-          {scanResult}
-        </div>
-      )}
+        {/* Stop Scanning Button */}
+        {scanning && !cameraStarting && (
+          <div className="flex justify-center mb-8">
+            <button
+              onClick={handleStopScanning}
+              className="group relative overflow-hidden px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-red-600 to-pink-600 text-white font-bold text-lg sm:text-xl rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300 cursor-pointer"
+              style={{
+                boxShadow: '0 0 30px rgba(239, 68, 68, 0.4)'
+              }}
+            >
+              {/* Animated background overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-pink-400 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* Button content */}
+              <span className="relative z-10 flex items-center gap-3">
+                <span className="text-xl sm:text-2xl">⏹️</span>
+                <span className="tracking-wide">Stop Scanning</span>
+              </span>
+            </button>
+          </div>
+        )}
+
+        {/* Camera Starting State */}
+        {cameraStarting && (
+          <div className="flex flex-col items-center justify-center mb-8">
+            <div className="relative w-80 h-80 bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl shadow-2xl border-4 border-green-200 overflow-hidden">
+              {/* Loading animation */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
+              </div>
+              
+              {/* Pulse effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-lime-400 opacity-30 animate-pulse"></div>
+            </div>
+            
+            <div className="mt-6 text-center">
+              <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg">
+                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-green-700 font-semibold text-lg">Starting Camera...</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Camera View with Enhanced Animations */}
+        {scanning && !cameraStarting && (
+          <div className="flex flex-col items-center justify-center mb-8">
+            <div className="relative">
+              {/* Main camera container */}
+              <div className="relative w-80 h-80 sm:w-96 sm:h-96 bg-black rounded-3xl shadow-2xl border-4 border-green-300 overflow-hidden">
+                {/* Camera view */}
+                <div id="reader" className="w-full h-full">
+                  {/* This will be populated by html5-qrcode */}
+                </div>
+                
+                {/* QR Code Detection Box */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className={`relative w-64 h-64 border-4 transition-all duration-300 ${
+                    capturing ? 'border-green-400 shadow-green-glow' : 'border-white/50'
+                  }`}>
+                    {/* Corner decorations */}
+                    <div className="absolute -top-2 -left-2 w-8 h-8 border-l-4 border-t-4 border-white"></div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 border-r-4 border-t-4 border-white"></div>
+                    <div className="absolute -bottom-2 -left-2 w-8 h-8 border-l-4 border-b-4 border-white"></div>
+                    <div className="absolute -bottom-2 -right-2 w-8 h-8 border-r-4 border-b-4 border-white"></div>
+                    
+                    {/* Scanning line animation */}
+                    <div className="absolute inset-0 overflow-hidden">
+                      <div className="absolute w-full h-1 bg-gradient-to-r from-transparent via-yellow-400 to-transparent animate-scan-line"></div>
+                    </div>
+                    
+                    {/* Capturing animation */}
+                    {capturing && (
+                      <>
+                        {/* Success pulse */}
+                        <div className="absolute inset-0 bg-green-400 opacity-30 animate-pulse"></div>
+                        
+                        {/* Ripple effect */}
+                        <div className="absolute inset-0 border-4 border-green-400 rounded-full animate-ripple"></div>
+                        <div className="absolute inset-0 border-4 border-green-400 rounded-full animate-ripple-delayed"></div>
+                        
+                        {/* Checkmark animation */}
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <div className="text-6xl text-green-400 animate-bounce">✓</div>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+              </div>
+              
+              {/* Status indicator */}
+              <div className="absolute -bottom-4 left-1/2 transform -translate-x-1/2">
+                <div className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
+                  capturing 
+                    ? 'bg-green-500 text-white animate-pulse' 
+                    : 'bg-lime-500 text-white'
+                }`}>
+                  {capturing ? '📸 Capturing QR Code...' : '🔍 Looking for QR Code'}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Enhanced Scan Result */}
+        {scanResult && (
+          <div className="flex justify-center">
+            <div className="relative group">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-lime-400 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div>
+              <div className="relative px-6 py-4 sm:px-8 sm:py-6 bg-white rounded-2xl shadow-xl border-2 border-green-200">
+                <div className="text-center">
+                  <div className="text-lg sm:text-xl font-bold text-gray-800 mb-2">Scan Result</div>
+                  <div className="text-xl sm:text-2xl font-semibold text-green-600">
+                    {scanResult}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      
     </div>
   );
 }
