@@ -119,7 +119,7 @@ function DashboardLayout() {
             {/* Navigation Links */}
             <div className="flex gap-1 md:gap-2">
               <NavLink
-                to="/dashboard/book"
+                to="/dashboard/validate"
                 className={
                   isBookActive
                     ? "group relative px-4 md:px-6 py-2 md:py-3 bg-gradient-to-r from-green-600 to-emerald-600 text-white font-semibold rounded-full shadow-lg transform scale-105 transition-all duration-300 text-sm md:text-base"

@@ -108,3 +108,52 @@ export const createSecureBooking = async ({ bookingId }, res) => {
     res.status(500).json({ message: "Failed to finalize booking", error });
   }
 };
+
+// validate
+
+export const validateQRCode = async (req, res) => {
+  const { qrData } = req.body;
+  if (!qrData) return res.status(400).json({ message: "QR data missing" });
+
+  const [payload, signature] = qrData.split(":");
+  if (!payload || !signature) {
+    return res.status(400).json({ message: "Invalid QR format" });
+  }
+
+  // ✅ Verify signature
+  const hmac = crypto.createHmac("sha256", SECRET);
+  hmac.update(payload);
+  const expectedSignature = hmac.digest("hex");
+
+  if (expectedSignature !== signature) {
+    return res.status(400).json({ message: "Invalid or tampered QR code" });
+  }
+
+  // ✅ Extract bookingId and userId from payload
+  const params = new URLSearchParams(payload);
+  const bookingId = params.get("bookingId");
+  const userId = params.get("userId");
+
+  try {
+    const ticket = await Booking.findOne({ _id: bookingId, userId });
+    if (!ticket) {
+      return res.status(404).json({ message: "Ticket not found" });
+    }
+
+    if (ticket.isScanned) {
+      return res.status(400).json({ message: "Ticket already scanned" });
+    }
+
+    // ✅ Mark as scanned
+    ticket.isScanned = true;
+    await ticket.save();
+
+    res.status(200).json({
+      message: "Ticket valid",
+      name: ticket.name,
+      status: ticket.paymentStatus
+    });
+  } catch (err) {
+    res.status(500).json({ message: "Failed to validate ticket" });
+  }
+};
