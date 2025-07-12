@@ -24,7 +24,7 @@ export const sendOtp = async (req, res) => {
   await Otp.create({ phone, otp: hashedOtp }); // 🆕 save hashed OTP
 
   // Integrate SMS sending API like Twilio, Fast2SMS, MSG91
-  console.log(`✅ OTP for ${phone}: ${otp}`); // remove in production
+ 
 
   try {
     await sendOTP(phone, otp);
@@ -68,7 +68,6 @@ export const resendOtp = async (req, res) => {
 
     // Send via SMS
     await sendOTP(phone, otp);
-    console.log(`✅ [RESEND OTP] for ${phone}: ${otp}`); // dev only
 
     res.status(200).json({ message: "OTP resent successfully" });
   } catch (error) {
@@ -194,7 +193,6 @@ export const sendResetOtp = async (req, res) => {
     await Otp.create({ phone, otp: hashedOtp });
 
     await sendOTP(phone, otp); // via Twilio
-    console.log(`✅ [RESET OTP] for ${phone}: ${otp}`);
 
     res.status(200).json({
       message: "OTP sent for password reset",

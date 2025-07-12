@@ -14,7 +14,6 @@ export const sendOTP = async (toPhone, otp) => {
       to: `+91${toPhone}`,
     });
 
-    console.log("✅ OTP sent:", message.sid);
     return message.sid;
   } catch (error) {
     console.error("❌ Failed to send OTP:", error);

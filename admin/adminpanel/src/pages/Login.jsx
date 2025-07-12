@@ -8,8 +8,11 @@ import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth.js";
 
 function Login() {
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const DEMO_MODE = true;
+
+  const [phone, setPhone] = useState(DEMO_MODE ? "9413245777" : "");
+  const [password, setPassword] = useState(DEMO_MODE ? "Happy@2021" : "");
+
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { refetch } = useAuth();
@@ -26,7 +29,7 @@ function Login() {
     }
 
     try {
-      await API.post("/users/login", { phone, password, role:"admin" });
+      await API.post("/users/login", { phone, password, role: "admin" });
       await refetch();
       toast.success("Login successful!");
       setTimeout(() => {
@@ -75,7 +78,7 @@ function Login() {
               </div>
             </div>
             <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-green-700 mb-2">
-               Hey Admin! 👋
+              Hey Admin! 👋
             </h2>
             <p className="text-emerald-700/70 font-medium">
               Secure login to manage your platform
@@ -189,7 +192,7 @@ function Login() {
           <div className="space-y-4">
             <div className="flex flex-col  justify-between gap-4">
               <Link
-                to="/forgot-password"
+                to={DEMO_MODE ? "/login" : "/forgot-password"}
                 className="group relative overflow-hidden px-4 py-2 bg-gradient-to-r from-emerald-100/70 to-green-100/70 backdrop-blur-sm text-emerald-700 font-semibold rounded-xl border border-emerald-200/50 hover:border-emerald-300 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg transform hover:scale-[1.02]"
               >
                 <span className="relative z-10 flex items-center gap-2">

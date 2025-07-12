@@ -6,9 +6,7 @@ export const getEvents = async (req, res) => {
   try {
     const events = await Event.find(); // Fetch all documents
     
-    // You can log or do any logic before sending the response
-    // console.log("✅ Events fetched successfully");
-    // console.log(events);
+    
 
     res.status(200).json(events); // Return them in the response
     // res.send("API is running...");

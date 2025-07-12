@@ -10,8 +10,11 @@ import { toast } from "react-toastify";
 import useAuth from "../hooks/useAuth";
 
 function Login() {
-  const [phone, setPhone] = useState("");
-  const [password, setPassword] = useState("");
+  const DEMO_MODE = true;
+
+  const [phone, setPhone] = useState(DEMO_MODE ? "9413245777" : "");
+  const [password, setPassword] = useState(DEMO_MODE ? "Happy@2021" : "");
+
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { refetch } = useAuth();
@@ -191,7 +194,7 @@ function Login() {
           <div className="space-y-4">
             <div className="flex flex-col sm:flex-row justify-between gap-4">
               <Link
-                to="/register"
+                to={DEMO_MODE ? "/login" : "/register"}
                 className="group relative overflow-hidden px-4 py-2 bg-gradient-to-r from-emerald-100/70 to-green-100/70 backdrop-blur-sm text-emerald-700 font-semibold rounded-xl border border-emerald-200/50 hover:border-emerald-300 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg transform hover:scale-[1.02]"
               >
                 <span className="relative z-10 flex items-center gap-2">
@@ -214,7 +217,7 @@ function Login() {
               </Link>
 
               <Link
-                to="/forgot-password"
+                to={DEMO_MODE ? "/login" : "/forgot-password"}
                 className="group relative overflow-hidden px-4 py-2 bg-gradient-to-r from-emerald-100/70 to-green-100/70 backdrop-blur-sm text-emerald-700 font-semibold rounded-xl border border-emerald-200/50 hover:border-emerald-300 transition-all duration-300 flex items-center justify-center gap-2 hover:shadow-lg transform hover:scale-[1.02]"
               >
                 <span className="relative z-10 flex items-center gap-2">
