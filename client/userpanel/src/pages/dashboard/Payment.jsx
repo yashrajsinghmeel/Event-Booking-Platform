@@ -19,16 +19,13 @@ function Payment() {
       });
       return;
     }
-
     const createOrder = async () => {
       try {
         const res = await API.post("/payments/create-order", {
           bookingId,
         });
-
         const { ticket, order, amount, currency } = res.data;
-
-        //  loads Razorpay’s browser-side payment widget, absolutely required for user to pay.
+        // loads Razorpay's browser-side payment widget, absolutely required for user to pay.
         const razorpayLoaded = await loadRazorpay(
           "https://checkout.razorpay.com/v1/checkout.js"
         );
@@ -36,7 +33,6 @@ function Payment() {
           toast.error("Razorpay failed to load. Check connection.");
           return;
         }
-
         const options = {
           key: import.meta.env.VITE_RAZORPAY_KEY_ID,
           amount: order.amount,
@@ -79,7 +75,6 @@ function Payment() {
             },
           },
         };
-
         rzpInstance.current = new window.Razorpay(options);
         rzpInstance.current.open();
       } catch (error) {
@@ -97,12 +92,25 @@ function Payment() {
   }, [bookingId]);
 
   return (
-    <div className="h-screen bg-[linear-gradient(to_right,rgba(67,139,71,0.4),rgba(244,196,48,0.4),rgba(47,102,50,0.4))]">
-      {isLoading ? (
-        <div className="text-center py-10 text-green-700 font-semibold">
-          Loading Payment Portal...
-        </div>
-      ) : null}
+    <div className="h-screen relative bg-gradient-to-br from-green-50 via-emerald-50 to-green-100 overflow-hidden">
+      {/* Animated background elements - same as HeroSection */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-10 left-10 w-20 h-20 bg-green-200 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute top-32 right-16 w-16 h-16 bg-emerald-200 rounded-full opacity-30 animate-bounce"></div>
+        <div className="absolute bottom-20 left-20 w-12 h-12 bg-green-300 rounded-full opacity-25 animate-pulse"></div>
+        <div className="absolute bottom-32 right-10 w-24 h-24 bg-emerald-300 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-1/2 left-1/4 w-8 h-8 bg-green-400 rounded-full opacity-15 animate-ping"></div>
+        <div className="absolute top-1/4 right-1/3 w-14 h-14 bg-emerald-400 rounded-full opacity-20 animate-pulse"></div>
+      </div>
+
+      {/* Content with relative positioning to appear above background */}
+      <div className="relative z-10 flex items-center justify-center h-full">
+        {isLoading ? (
+          <div className="text-center py-10 text-green-700 font-semibold">
+            Loading Payment Portal...
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
