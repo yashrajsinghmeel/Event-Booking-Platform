@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import API from "../../services/api";
-import './scanqr.css'
+import './Scanqr.css'
 
 function ScanQR() {
   const [scanResult, setScanResult] = useState(null);
