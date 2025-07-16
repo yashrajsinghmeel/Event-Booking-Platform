@@ -13,6 +13,7 @@ function signQRCodeData(payload) {
   const hmac = crypto.createHmac("sha256", SECRET);
   hmac.update(payload);
   const signature = hmac.digest("hex");
+  console.log(`${payload}:${signature}`);
   return `${payload}:${signature}`;
 }
 
@@ -140,8 +141,13 @@ export const validateQRCode = async (req, res) => {
       return res.status(404).json({ message: "Ticket not found" });
     }
 
+   
+    
+    let isScanned = "";
     if (ticket.isScanned) {
-      return res.status(400).json({ message: "Ticket already scanned" });
+      isScanned = "Ticket already scanned"
+    } else {
+      isScanned = "Entry Allowed"
     }
 
     // ✅ Mark as scanned
@@ -151,7 +157,8 @@ export const validateQRCode = async (req, res) => {
     res.status(200).json({
       message: "Ticket valid",
       name: ticket.name,
-      status: ticket.paymentStatus
+      status: ticket.paymentStatus,
+      ScanStatus:isScanned,
     });
   } catch (err) {
     res.status(500).json({ message: "Failed to validate ticket" });
