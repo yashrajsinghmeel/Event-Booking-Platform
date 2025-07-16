@@ -9,9 +9,6 @@ function ScanQR() {
   const [capturing, setCapturing] = useState(false);
   const html5QrCodeRef = useRef(null);
   const isRunningRef = useRef(false);
-  let i = 0;
-  let j = 0;
-  let z = 0;
 
   useEffect(() => {
     if (!scanning) return;
@@ -20,7 +17,6 @@ function ScanQR() {
 
     // Use requestAnimationFrame to ensure DOM is fully updated
     const initializeScanner = async () => {
-      
       try {
         const { Html5Qrcode } = await import("html5-qrcode");
 
@@ -66,11 +62,10 @@ function ScanQR() {
           async (decodedText) => {
             if (!isRunningRef.current) return;
             isRunningRef.current = false;
-            
+
             setCapturing(true);
 
             setTimeout(async () => {
-             
               try {
                 if (html5QrCodeRef.current && isRunningRef.current) {
                   isRunningRef.current = false;
@@ -89,8 +84,6 @@ function ScanQR() {
                 const res = await API.post("/bookings/validate", {
                   qrData: decodedText,
                 });
-
-                console.log(res.data.isScanned);
 
                 if (res.data.ScanStatus === "Ticket already scanned") {
                   new Audio("/errorsound.mp3").play().catch(() => {});
