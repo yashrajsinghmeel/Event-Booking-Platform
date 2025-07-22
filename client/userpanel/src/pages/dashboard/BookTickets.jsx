@@ -273,7 +273,7 @@ function BookTickets() {
                     )}-500 to-${style.badgeColor.replace(
                       "bg-",
                       ""
-                    )}-600 text-white font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-button-pulse`}
+                    )}-600 text-emerald-900 font-bold rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 animate-button-pulse`}
                   >
                     Book Now
                   </button>
